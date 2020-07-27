@@ -1,5 +1,5 @@
-# Full Stack Starter Templates 
-Clean full stack starter templates to quickly get a project started.
+# Full Stack Boilerplates
+Clean full stack boilerplates to quickly get a stack up.
 
 # MongoDB Based stacks
 * MERN - MongoDB Express React Node.js
