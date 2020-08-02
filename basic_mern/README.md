@@ -3,6 +3,14 @@
 
 **M**ongo **E**xpress **R**eact **N**ode
 
+## Requirements
+
+* Node.js version v12.14.0 or higher
+* yarn
+* nodemon (globally or locally)
+* Mongo DB database 
+    - An account with Mongo Atlas would be ideal and easy to set up
+
 ## Client
 
 React.js made with `create-react-app`
