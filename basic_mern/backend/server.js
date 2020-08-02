@@ -4,8 +4,9 @@ const app = express()
 // Connect to db
 require('./config/db.connect')
 
-
+// routes
 app.get('/', (req, res, next) => res.json({ success: true, message: 'home route' }))
+app.use('/api/', require('./routes/'))
 
 
 const PORT = 8080
