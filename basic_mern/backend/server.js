@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 
+// Connect to db
+require('./config/db.connect')
+
 
 app.get('/', (req, res, next) => res.json({ success: true, message: 'home route' }))
 
