@@ -7,8 +7,8 @@ const Item = require('./Item.model')
 
 // Index Route - Get all Items
 router.get('/', async (req, res) => {
-    const Items = await Item.find({})
-    res.json({ Items })
+    const items = await Item.find({})
+    res.json({ items })
 })
 
 // Create Route
