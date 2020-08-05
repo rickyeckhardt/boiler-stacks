@@ -13,6 +13,9 @@ router.get('/', async (req, res) => {
 
 // Create Route
 router.post('/', async (req, res) => {
+
+    console.log(req.body)
+
     let newItem
     try {
         newItem = await Item.create(req.body)
