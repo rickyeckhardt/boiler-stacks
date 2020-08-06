@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 import Layout from './layout'
 
-let fetchedItems
-
-
 
 export default function Items() {
 
@@ -18,20 +15,58 @@ export default function Items() {
             .then(res => setItems(res.items))
     }, []) // putting an empty array as the second parameter makes sure useEffect only runs once
 
+    // Handle edit
+    const handleEdit = item => {
+
+        // Get new data
+        const property = prompt("Enter in the new property")
+
+        // Update item in database
+        fetch(`http://localhost:8080/api/items/${item._id}`,
+            {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ property })
+            })
+            .then(res => res.json())
+            .then(data => {
+
+                // Update the UI
+                let updatedItems = [...items]
+                updatedItems.forEach(itm => {
+                    if (itm._id === data.updatedItem._id) {
+                        itm.property = data.updatedItem.property
+                    }
+                })
+                setItems(updatedItems)
+
+                console.log(data) // could send user feedback
+
+            })
+
+
+
+    }
+
 
     // Handle delete
     const handleDelete = item => {
         if (window.confirm("Are you sure? This cannot be undone.")) {
+
+            // Delete item in database
             fetch(`http://localhost:8080/api/items/${item._id}`,
                 {
                     method: 'delete',
                     headers: {
                         'Content-Type': 'application/json'
                     }
-                }).then(function (response) {
-                    return response.json()
-                }).then(function (data) {
-                    setItems(items.filter(i => i._id !== item._id))
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data) // could send user feedback
+                    setItems(items.filter(i => i._id !== item._id)) // Reset items in UI
                 })
         }
     }
@@ -46,7 +81,7 @@ export default function Items() {
                         {item.property}
                         <ul>
                             <li>
-                                <button>Edit</button>
+                                <button onClick={() => handleEdit(item)}>Edit</button>
                             </li>
                             <li>
                                 <button onClick={() => handleDelete(item)}>Delete</button>

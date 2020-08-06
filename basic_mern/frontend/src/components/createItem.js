@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 
 import Layout from './layout'
+import { Router } from 'react-router-dom'
 
-const CreateItem = () => {
+const CreateItem = (props) => {
 
     const [property, setProperty] = useState('')
 
     const handleSubmit = e => {
         e.preventDefault()
 
+        // Send new item data to api
         fetch('http://localhost:8080/api/items',
             {
                 method: 'post',
@@ -19,7 +21,10 @@ const CreateItem = () => {
             }).then(function (response) {
                 return response.json()
             }).then(function (data) {
-                console.log('Created Item:', data)
+
+                console.log('Created Item:', data) // could add user feedback
+
+                props.history.push('/items')
             })
     }
 
