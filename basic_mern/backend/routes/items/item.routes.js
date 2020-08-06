@@ -14,8 +14,6 @@ router.get('/', async (req, res) => {
 // Create Route
 router.post('/', async (req, res) => {
 
-    console.log(req.body)
-
     let newItem
     try {
         newItem = await Item.create(req.body)
@@ -49,7 +47,7 @@ router.get('/:id', async (req, res) => {
 
     return res.json({
         success: true,
-        message: `Item has been found`,
+        message: `Item has been found.`,
         item: founditem
     })
 })

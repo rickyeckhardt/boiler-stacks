@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import Layout from './layout'
-
+import { api_url } from '../config'
 
 export default function Items() {
 
@@ -10,7 +10,7 @@ export default function Items() {
 
     // Get items from api
     useEffect(() => {
-        fetch('http://localhost:8080/api/items')
+        fetch(`${api_url}items`)
             .then(data => data.json())
             .then(res => setItems(res.items))
     }, []) // putting an empty array as the second parameter makes sure useEffect only runs once
@@ -19,10 +19,10 @@ export default function Items() {
     const handleEdit = item => {
 
         // Get new data
-        const property = prompt("Enter in the new property")
+        const property = prompt(`Enter in the new property.\nCurrently: ${item.property}`)
 
         // Update item in database
-        fetch(`http://localhost:8080/api/items/${item._id}`,
+        fetch(`${api_url}items/${item._id}`,
             {
                 method: 'put',
                 headers: {
@@ -56,7 +56,7 @@ export default function Items() {
         if (window.confirm("Are you sure? This cannot be undone.")) {
 
             // Delete item in database
-            fetch(`http://localhost:8080/api/items/${item._id}`,
+            fetch(`${api_url}items/${item._id}`,
                 {
                     method: 'delete',
                     headers: {

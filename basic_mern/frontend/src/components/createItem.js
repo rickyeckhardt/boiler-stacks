@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import Layout from './layout'
-import { Router } from 'react-router-dom'
+import { api_url } from '../config'
 
 const CreateItem = (props) => {
 
@@ -11,7 +11,7 @@ const CreateItem = (props) => {
         e.preventDefault()
 
         // Send new item data to api
-        fetch('http://localhost:8080/api/items',
+        fetch(`${api_url}items`,
             {
                 method: 'post',
                 headers: {
